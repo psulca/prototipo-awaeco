@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { LuChevronLeft, LuMinus, LuPlus, LuTrash } from "react-icons/lu";
+import Image from "next/image";
 
 type CartItem = {
   img: string;
@@ -97,7 +98,7 @@ export default function CartScreen({ cart, onClose, setCart, onProceedToCheckout
                 className={`flex items-center bg-principal-100 rounded-xl p-3 shadow-sm relative transition-transform duration-300 ${isSwiped ? '-translate-x-20' : 'translate-x-0'}`}
                 onTouchStart={(e) => handleSwipeStart(e, idx)}
               >
-                <img src={item.img} alt={item.title} className="w-14 h-14 rounded-lg object-cover mr-3" />
+                <Image src={item.img} alt={item.title} width={56} height={56} className="w-14 h-14 rounded-lg object-cover mr-3" />
                 <div className="flex-1">
                   <div className="font-semibold text-[#222] text-sm mb-1">{item.title}</div>
                   <div className="text-xs text-[#222]/55 mb-1">Capacidad: {item.capacity}</div>

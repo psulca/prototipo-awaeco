@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FaCcMastercard, FaCcPaypal, FaGoogle, FaApple } from "react-icons/fa";
 import { LuQrCode, LuChevronLeft } from "react-icons/lu";
 import MastercardIcon from "./MastercardIcon";
 import VisaIcon from "./VisaIcon";
@@ -133,7 +132,7 @@ export default function ConfirmOrderScreen({ total = 34.15, onConfirm, onBack }:
           <div className="flex items-center bg-white rounded-xl p-3 shadow border border-[#eee]">
             <div className="flex-1">
               <span className="block text-[13px] font-semibold text-[#222] mb-1">Residencia</span>
-              <span className="block text-xs text-[#666]">3891 Ranchview Dr, Richardson, California 62639</span>
+              <span className="block text-xs text-[#666]">Av. de la Marina 2810, San Miguel 15087</span>
             </div>
             <span className="w-12 h-12 bg-principal-300 rounded-xl flex items-center justify-center ml-2">
               <svg width="28" height="28" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#2ec4b6"/><path d="M12 8a4 4 0 100 8 4 4 0 000-8z" fill="#fff"/></svg>

@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 type Bestseller = {
   cap: string;
@@ -20,9 +21,11 @@ export default function Bestsellers({ bestsellers }: Props) {
             key={i}
             className="min-w-[80px] max-w-[80px] aspect-square bg-principal-300 border border-[#222] rounded-[14px] flex items-end justify-center relative"
           >
-            <img
+            <Image
               src={`https://placehold.co/80x80?text=Botella+${b.cap}`}
               alt={`Botella ${b.cap}`}
+              width={80}
+              height={80}
               className="w-full h-full object-cover rounded-[14px] bg-principal-100"
             />
             <span className="absolute left-2 bottom-2 bg-accent-100 text-[#222] text-[11px] font-semibold rounded-[8px] px-2 py-0.5 shadow-sm border-none min-w-[16px] text-center">

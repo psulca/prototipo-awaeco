@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import { LuMinus, LuPlus, LuChevronLeft } from "react-icons/lu";
 
 type Product = {
@@ -30,10 +31,12 @@ export default function ProductDetail({ product, qty, setQty, onClose, onAddToCa
       </div>
       <div className="flex flex-col items-center mt-2 mb-5">
         <div className="w-[220px] h-[220px] bg-white rounded-[32px] shadow flex items-center justify-center relative">
-          <img
+          <Image
             className="w-[160px] h-[180px] object-contain rounded-[18px]"
             src={product.img.replace("80x80", "160x180")}
             alt={product.title}
+            width={160}
+            height={180}
           />
           <button className="absolute top-4 right-4 bg-white rounded-full w-9 h-9 flex items-center justify-center shadow text-[#EA7A53] text-lg border-none">
             &#9825;

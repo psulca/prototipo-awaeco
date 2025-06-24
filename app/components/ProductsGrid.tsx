@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 type Product = {
   img: string;
@@ -22,9 +23,11 @@ export default function ProductsGrid({ products, onProductClick }: Props) {
           className="w-full h-[140px] bg-principal-300 rounded-[14px] shadow p-3 flex flex-col items-start text-left transition hover:scale-[1.03] hover:shadow-lg cursor-pointer"
           onClick={() => onProductClick(p)}
         >
-          <img
+          <Image
             src={p.img}
             alt={p.title}
+            width={64}
+            height={64}
             className="w-16 h-16 object-cover rounded-[12px] bg-white self-center mb-2 shadow-sm"
           />
           <div className="text-[0.95rem] font-bold text-[#222] mb-0.5 ml-0.5 leading-tight line-clamp-1">

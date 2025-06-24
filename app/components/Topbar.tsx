@@ -11,7 +11,7 @@ export default function Topbar() {
       <div className="relative w-12 h-12 flex items-center justify-center">
         <Image
           className="w-7 h-7 rounded-full bg-pink-100 object-cover"
-          src="https://i.imgur.com/0y0y0y0.png"
+          src="/im4.jpg"
           alt="Avatar"
           width={28}
           height={28}

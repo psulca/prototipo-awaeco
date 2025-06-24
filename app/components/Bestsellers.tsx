@@ -9,6 +9,8 @@ type Props = {
   bestsellers: Bestseller[];
 };
 
+const localImages = ["/im1.png", "/im2.png", "/im3.png"];
+
 export default function Bestsellers({ bestsellers }: Props) {
   return (
     <div className="px-5 pt-4">
@@ -22,7 +24,7 @@ export default function Bestsellers({ bestsellers }: Props) {
             className="min-w-[80px] max-w-[80px] aspect-square bg-principal-300 border border-[#222] rounded-[14px] flex items-end justify-center relative"
           >
             <Image
-              src={`https://placehold.co/80x80?text=Botella+${b.cap}`}
+              src={localImages[Math.floor(Math.random() * localImages.length)]}
               alt={`Botella ${b.cap}`}
               width={80}
               height={80}

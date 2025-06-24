@@ -14,6 +14,8 @@ type Props = {
   onProductClick: (product: Product) => void;
 };
 
+const localImages = ["/im1.png", "/im2.png", "/im3.png"];
+
 export default function ProductsGrid({ products, onProductClick }: Props) {
   return (
     <div className="flex-1 overflow-y-auto px-5 pb-5 grid grid-cols-2 gap-4 mt-2 scrollbar-hide">
@@ -24,7 +26,7 @@ export default function ProductsGrid({ products, onProductClick }: Props) {
           onClick={() => onProductClick(p)}
         >
           <Image
-            src={p.img}
+            src={localImages[Math.floor(Math.random() * localImages.length)]}
             alt={p.title}
             width={64}
             height={64}

@@ -19,6 +19,8 @@ type Props = {
   onProceedToCheckout?: () => void;
 };
 
+const localImages = ["/im1.png", "/im2.png", "/im3.png"];
+
 export default function CartScreen({ cart, onClose, setCart, onProceedToCheckout }: Props) {
   const [swipedItem, setSwipedItem] = useState<number | null>(null);
   const subtotal = cart.reduce((sum, item) => sum + parseFloat(item.price.replace(/[^\d.]/g, "")) * item.qty, 0);
@@ -98,7 +100,7 @@ export default function CartScreen({ cart, onClose, setCart, onProceedToCheckout
                 className={`flex items-center bg-principal-100 rounded-xl p-3 shadow-sm relative transition-transform duration-300 ${isSwiped ? '-translate-x-20' : 'translate-x-0'}`}
                 onTouchStart={(e) => handleSwipeStart(e, idx)}
               >
-                <Image src={item.img} alt={item.title} width={56} height={56} className="w-14 h-14 rounded-lg object-cover mr-3" />
+                <Image src={localImages[Math.floor(Math.random() * localImages.length)]} alt={item.title} width={56} height={56} className="w-14 h-14 rounded-lg object-cover mr-3" />
                 <div className="flex-1">
                   <div className="font-semibold text-[#222] text-sm mb-1">{item.title}</div>
                   <div className="text-xs text-[#222]/55 mb-1">Capacidad: {item.capacity}</div>

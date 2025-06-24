@@ -19,6 +19,8 @@ type Props = {
   onAddToCart: (product: Product, qty: number) => void;
 };
 
+const localImages = ["/im1.png", "/im2.png", "/im3.png"];
+
 export default function ProductDetail({ product, qty, setQty, onClose, onAddToCart }: Props) {
   const totalPrice = (parseFloat(product.price.replace(/[^\d.]/g, "")) * qty).toFixed(2);
   return (
@@ -33,7 +35,7 @@ export default function ProductDetail({ product, qty, setQty, onClose, onAddToCa
         <div className="w-[220px] h-[220px] bg-white rounded-[32px] shadow flex items-center justify-center relative">
           <Image
             className="w-[160px] h-[180px] object-contain rounded-[18px]"
-            src={product.img.replace("80x80", "160x180")}
+            src={localImages[Math.floor(Math.random() * localImages.length)]}
             alt={product.title}
             width={160}
             height={180}

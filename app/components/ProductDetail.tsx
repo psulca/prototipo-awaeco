@@ -7,8 +7,7 @@ import { OrbitControls } from "@react-three/drei";
 import { TextureLoader } from "three";
 
 // Placeholder 3D model (simple box)
-function Bottle3D({ textureUrl }: { textureUrl: string | undefined }) {
-  if (!textureUrl) return null;
+function Bottle3D({ textureUrl }: { textureUrl: string }) {
   const texture = useLoader(TextureLoader, textureUrl);
   return (
     <mesh>
@@ -162,7 +161,9 @@ export default function ProductDetail({ product, qty, setQty, onClose, onAddToCa
                   <ambientLight intensity={0.7} />
                   <directionalLight position={[5, 5, 5]} />
                   <OrbitControls enablePan={false} />
-                  <Bottle3D textureUrl={selectedDesign || product.img} />
+                  {(selectedDesign || product.img) && (
+                    <Bottle3D textureUrl={selectedDesign || product.img} />
+                  )}
                 </Canvas>
               </div>
             </div>

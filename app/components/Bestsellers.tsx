@@ -68,7 +68,10 @@ export default function Bestsellers({ bestsellers, onProductClick }: Props) {
             {/* Floating + button with strong pastel color */}
             <button
               className={`absolute top-3 right-3 w-9 h-9 rounded-full ${pastelStrong[i % pastelStrong.length]} flex items-center justify-center shadow-md border border-white/40 hover:brightness-110 transition`}
-              onClick={e => { e.stopPropagation(); onProductClick && onProductClick(b); }}
+              onClick={e => {
+                e.stopPropagation();
+                if (onProductClick) onProductClick(b);
+              }}
               aria-label="Agregar"
             >
               <FiPlus className="text-2xl text-white drop-shadow" />

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { motion as motionSvg } from "motion/react";
 import Topbar from "./components/Topbar";
@@ -23,42 +23,42 @@ type CartItem = Product & { qty: number };
 
 const products = [
   {
-    img: "https://placehold.co/80x80?text=Bottle1",
+    img: "/im1.png",
     title: "Custom Bottle1",
     capacity: "1L",
     price: "$12.99",
     desc: "Botella reutilizable de alta calidad, perfecta para mantener tus bebidas frías o calientes durante horas. Personalízala a tu gusto y cuida el planeta con estilo.",
   },
   {
-    img: "https://placehold.co/80x80?text=Bottle2",
+    img: "/im2.png",
     title: "Custom Bottle2",
     capacity: "1.5L",
     price: "$19.99",
     desc: "Botella reutilizable de alta calidad, perfecta para mantener tus bebidas frías o calientes durante horas. Personalízala a tu gusto y cuida el planeta con estilo.",
   },
   {
-    img: "https://placehold.co/80x80?text=Tote",
+    img: "/im3.png",
     title: "Custom Tote Bag",
     capacity: "2L",
     price: "$15.99",
     desc: "Botella reutilizable de alta calidad, perfecta para mantener tus bebidas frías o calientes durante horas. Personalízala a tu gusto y cuida el planeta con estilo.",
   },
   {
-    img: "https://placehold.co/80x80?text=Bottle3",
+    img: "/im1.png",
     title: "Custom Bottle3",
     capacity: "1L",
     price: "$3.99",
     desc: "Botella reutilizable de alta calidad, perfecta para mantener tus bebidas frías o calientes durante horas. Personalízala a tu gusto y cuida el planeta con estilo.",
   },
   {
-    img: "https://placehold.co/80x80?text=Bottle4",
+    img: "/im2.png",
     title: "Custom Bottle4",
     capacity: "2L",
     price: "$22.99",
     desc: "Botella reutilizable de alta calidad, perfecta para mantener tus bebidas frías o calientes durante horas. Personalízala a tu gusto y cuida el planeta con estilo.",
   },
   {
-    img: "https://placehold.co/80x80?text=Bottle5",
+    img: "/im3.png",
     title: "Eco Bottle5",
     capacity: "1.5L",
     price: "$17.99",
@@ -66,12 +66,8 @@ const products = [
   },
 ];
 
-const bestsellers = [
-  { cap: "1L" },
-  { cap: "1.5L" },
-  { cap: "2L" },
-  { cap: "1L" },
-];
+// Usar los primeros 3 productos como bestsellers
+const bestsellers = products.slice(0, 3);
 
 const capacities = ["1L", "1.5L", "2L"];
 
@@ -84,6 +80,20 @@ export default function Home() {
   const [detailProduct, setDetailProduct] = useState(products[0]);
   const [qty, setQty] = useState(1);
   const [cart, setCart] = useState<CartItem[]>([]);
+  const gridScrollRef = useRef<HTMLDivElement>(null);
+  const capacidadRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (gridScrollRef.current) {
+      gridScrollRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [selectedCapacity]);
+
+  useEffect(() => {
+    if (capacidadRef.current) {
+      capacidadRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [selectedCapacity]);
 
   // Navegación
   const showDetailScreen = (product: Product) => {
@@ -113,20 +123,25 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 40 }}
               transition={{ duration: 0.22 }}
-              className="w-[375px] h-[812px] bg-principal-100 rounded-[32px] shadow-xl flex flex-col overflow-hidden relative"
+              className="w-[375px] h-[812px] bg-[#F8F6E6] rounded-[32px] shadow-xl flex flex-col overflow-hidden relative"
             >
               <Topbar />
-              <Bestsellers bestsellers={bestsellers} />
-              <CustomDesignBanner />
-              <CapacitySelector
-                capacities={capacities}
-                selected={selectedCapacity}
-                onSelect={setSelectedCapacity}
-              />
-              <ProductsGrid
-                products={selectedCapacity ? products.filter((p) => p.capacity === selectedCapacity) : products}
-                onProductClick={showDetailScreen}
-              />
+              <div className="flex-1 overflow-y-auto scrollbar-hide" ref={gridScrollRef}>
+                <Bestsellers bestsellers={bestsellers} onProductClick={showDetailScreen} />
+                <CustomDesignBanner />
+                <div ref={capacidadRef} className="sticky top-0 z-10 bg-[#F8F6E6] scroll-mt-8">
+                  <CapacitySelector
+                    capacities={capacities}
+                    selected={selectedCapacity}
+                    onSelect={setSelectedCapacity}
+                  />
+                </div>
+                <ProductsGrid
+                  products={selectedCapacity ? products.filter((p) => p.capacity === selectedCapacity) : products}
+                  onProductClick={showDetailScreen}
+                  extraPadding={cart.length > 0}
+                />
+              </div>
               {cart.length > 0 && (
                 <CartBar cart={cart} onViewCart={showCartScreen} />
               )}
@@ -221,7 +236,7 @@ export default function Home() {
             >
               <div className="flex flex-col items-center justify-center">
                 <svg width="80" height="80" viewBox="0 0 80 80">
-                  <circle cx="40" cy="40" r="38" fill="#2ec4b6" stroke="#e0e0e0" strokeWidth="2" />
+                  <circle cx="40" cy="40" r="38" fill="#C1DF7C " stroke="#e0e0e0" strokeWidth="2" />
                   <motionSvg.path
                     d="M26 42 L37 53 L56 32"
                     fill="none"

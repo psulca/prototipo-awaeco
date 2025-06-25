@@ -7,12 +7,13 @@ import { OrbitControls } from "@react-three/drei";
 import { TextureLoader } from "three";
 
 // Placeholder 3D model (simple box)
-function Bottle3D({ textureUrl }: { textureUrl: string }) {
-  const texture = textureUrl ? useLoader(TextureLoader, textureUrl) : undefined;
+function Bottle3D({ textureUrl }: { textureUrl: string | undefined }) {
+  if (!textureUrl) return null;
+  const texture = useLoader(TextureLoader, textureUrl);
   return (
     <mesh>
       <boxGeometry args={[1, 2, 1]} />
-      <meshStandardMaterial map={texture} color={!texture ? '#ccc' : undefined} />
+      <meshStandardMaterial map={texture} />
     </mesh>
   );
 }
